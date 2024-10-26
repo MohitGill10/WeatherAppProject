@@ -1,0 +1,167 @@
+-- Create Database Part
+CREATE DATABASE GlobalWeatherDB;
+
+--Use the Database
+USE GlobalWeatherDB;
+
+-- Create Table 
+CREATE TABLE WeatherData (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    country VARCHAR(100),
+    location_name VARCHAR(100),
+    latitude DECIMAL(9,6),
+    longitude DECIMAL(9,6),
+    timezone VARCHAR(50),
+    last_updated_epoch INT,
+    last_updated DATETIME,
+    temperature_celsius FLOAT,
+    temperature_fahrenheit FLOAT,
+    condition_text VARCHAR(50),
+    wind_mph FLOAT,
+    wind_kph FLOAT,
+    wind_degree INT,
+    wind_direction VARCHAR(3),
+    pressure_mb FLOAT,
+    pressure_in FLOAT,
+    precip_mm FLOAT,
+    precip_in FLOAT,
+    humidity INT,
+    cloud INT,
+    feels_like_celsius FLOAT,
+    feels_like_fahrenheit FLOAT,
+    visibility_km FLOAT,
+    visibility_miles FLOAT,
+    uv_index FLOAT,
+    gust_mph FLOAT,
+    gust_kph FLOAT,
+    air_quality_Carbon_Monoxide FLOAT,
+    air_quality_Ozone FLOAT,
+    air_quality_Nitrogen_dioxide FLOAT,
+    air_quality_Sulphur_dioxide FLOAT,
+    air_quality_PM2_5 FLOAT,
+    air_quality_PM10 FLOAT,
+    air_quality_us_epa_index INT,
+    air_quality_gb_defra_index INT,
+    sunrise TIME,
+    sunset TIME,
+    moonrise TIME,
+    moonset TIME,
+    moon_phase VARCHAR(50),
+    moon_illumination INT
+);
+
+-- Import the Dataset
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Cleaned_GlobalWeather.csv'
+INTO TABLE WeatherData
+FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(
+    country, 
+    location_name, 
+    latitude, 
+    longitude, 
+    timezone, 
+    last_updated_epoch, 
+    @last_updated, 
+    temperature_celsius, 
+    temperature_fahrenheit, 
+    condition_text, 
+    wind_mph, 
+    wind_kph, 
+    wind_degree, 
+    wind_direction, 
+    pressure_mb, 
+    pressure_in, 
+    precip_mm, 
+    precip_in, 
+    humidity, 
+    cloud, 
+    feels_like_celsius, 
+    feels_like_fahrenheit, 
+    visibility_km, 
+    visibility_miles, 
+    uv_index, 
+    gust_mph, 
+    gust_kph, 
+    air_quality_Carbon_Monoxide, 
+    air_quality_Ozone, 
+    air_quality_Nitrogen_dioxide, 
+    air_quality_Sulphur_dioxide, 
+    air_quality_PM2_5, 
+    air_quality_PM10, 
+    air_quality_us_epa_index, 
+    air_quality_gb_defra_index, 
+    @sunrise,   
+    @sunset,    
+    @moonrise,  
+    @moonset,   
+    moon_phase, 
+    moon_illumination
+)
+SET 
+    last_updated = STR_TO_DATE(@last_updated, '%d/%m/%Y %H:%i'),
+    sunrise = STR_TO_DATE(NULLIF(@sunrise, 'No sunrise'), '%h:%i %p'),
+    sunset = STR_TO_DATE(NULLIF(@sunset, 'No sunset'), '%h:%i %p'),
+    moonrise = STR_TO_DATE(NULLIF(@moonrise, 'No moonrise'), '%h:%i %p'),
+    moonset = STR_TO_DATE(NULLIF(@moonset, 'No moonset'), '%h:%i %p');
+
+-- Retrieve the top 5 locations with the highest temperatures or lowest precipitation
+-- To get the top 5 locations with the highest temperatures:
+SELECT location_name, temperature_celsius
+FROM WeatherData
+ORDER BY temperature_celsius DESC
+LIMIT 5;
+
+--To get the top 5 locations with the lowest precipitation:
+SELECT location_name, precip_mm
+FROM WeatherData
+ORDER BY precip_mm ASC
+LIMIT 5;
+
+-- Retrieve all records for a specific date or condition (e.g., temperature > 35°C, precipitation > 100 mm)
+-- Retrieve all records where temperature is greater than 35°C
+SELECT *
+FROM WeatherData
+WHERE temperature_celsius > 35;
+
+--Retrieve all records where precipitation is greater than 100 mm:
+SELECT *
+FROM WeatherData
+WHERE precip_mm > 100;
+
+--To retrieve records for a specific date, let’s say for 16 May 2024
+SELECT *
+FROM WeatherData
+WHERE DATE(last_updated) = '2024-05-16';
+
+-- Perform a group by operation (e.g., average temperature by country, total precipitation by Country)
+-- Average Temperature by Country
+SELECT country, AVG(temperature_celsius) AS avg_temperature
+FROM WeatherData
+GROUP BY country
+ORDER BY avg_temperature DESC;
+
+--Total Precipitation by Country
+SELECT country, SUM(precip_mm) AS total_precipitation
+FROM WeatherData
+GROUP BY country
+ORDER BY total_precipitation DESC;
+
+
+Mongo Db Query:
+-- Filter for specific country (Albania)
+{ "country": "Albania" }
+
+-- Filter for May 2024:
+{ "last_updated": { "$regex": "^(.*)/(05)/(2024)" } }
+
+-- Top 3 Hottest Locations
+Sort: and use Limit as 3
+{ "temperature_celsius": -1 }
+
+-- Top 3 Locations with Lowest Precipitation
+Sort: and use Limit as 3
+{ "precip_mm": 1 }
+
+

@@ -1,0 +1,62 @@
+location,temperature,humidity,precipitation
+Kabul,26.6,24,0.0
+Tirana,19.0,94,0.1
+Algiers,23.0,29,0.0
+Andorra La Vella,6.3,61,0.3
+Luanda,26.0,89,0.0
+Saint John's,26.0,84,0.02
+Buenos Aires,8.0,93,0.0
+Yerevan,19.0,40,0.13
+Canberra,9.0,87,0.0
+Vienna,16.0,63,0.0
+Baku,17.0,68,0.0
+Nassau,27.0,89,0.0
+Manama,36.0,33,0.0
+Dhaka,38.4,31,0.0
+Bridgetown,28.0,74,0.0
+Minsk,17.0,29,0.0
+Brussels,15.0,94,0.25
+Belmopan,26.0,89,0.0
+Porto-Novo,28.0,79,0.02
+Thimphu,18.2,50,0.16
+Sucre,12.3,77,0.0
+Sarajevo,19.0,64,0.0
+Gaborone,22.0,43,0.0
+Bras,23.1,98,0.04
+Bandar Seri Begawan,32.0,84,0.0
+Sofia,12.0,77,0.0
+Ouagadougou,32.0,67,0.0
+Bujumbura,21.1,66,0.02
+Ivory,27.4,44,0.0
+Praia,22.0,69,0.0
+Phnom Penh,38.0,45,0.0
+Yaounde,25.0,78,0.0
+Ottawa,12.0,71,0.0
+Bangui,28.4,60,0.0
+N'djamena,37.2,27,0.0
+Santiago,1.0,93,0.0
+Beijing,29.0,22,0.0
+Bogot,15.9,62,0.0
+Moroni,27.5,73,0.1
+Brazzaville,29.6,66,0.0
+San Juan,21.0,100,0.17
+Zagreb,16.0,82,0.0
+Havana,26.0,84,0.0
+Nicosia,25.0,39,0.0
+Prague,18.0,49,0.0
+Kinshasa,29.4,67,0.0
+Copenhagen,16.0,55,0.0
+Djibouti,31.8,68,0.0
+Roseau,27.2,78,0.03
+Santo Domingo,23.0,94,0.0
+Quito,11.9,92,0.03
+Cairo,27.0,32,0.0
+San Salvador,26.0,94,0.3
+Malabo,30.0,89,0.2
+Asmara,22.6,42,0.15
+Tallinn,19.0,43,0.0
+Mbabane,22.2,39,0.0
+Addis Ababa,22.3,48,0.05
+Suva,26.0,89,0.0
+Helsinki,22.0,33,0.0
+Paris,15.0,72,0.01
